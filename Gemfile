@@ -1,5 +1,7 @@
 source :rubygems
 
+gemspec
+
 gem 'sinatra'
 gem 'json'
 gem 'mechanize'

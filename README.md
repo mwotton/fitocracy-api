@@ -1,5 +1,9 @@
-fitocracy-api
+fitocracy-gem
 =============
+
+This is a quick hack-and-slash job to allow me to pull in the API as a gem
+rather than going to an external site. If I were going to be less sketchy about this
+I'd get rid of the sinatra stuff and make it more focused, but I'm not.
 
 Feel free to look me up and follow me on fitocracy as sjoconnor.
 
