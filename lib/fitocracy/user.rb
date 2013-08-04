@@ -1,23 +1,31 @@
 require 'fitocracy/paths'
+module Fitocracy
+  class User < Base
 
-class Fitocracy::User
-  # include ::Fitocracy::Paths
+    has_many :activities
 
-  attr_reader :username, :password
-  attr_accessor :x_fitocracy_user, :agent, :error
+    # include ::Fitocracy::Paths
 
-  def initialize(hash={})
-    @username = hash[:username] || ENV['fitocracy_api_username']
-    @password = hash[:password] || ENV['fitocracy_api_password']
-    @agent    = hash[:agent]
+    attr_reader :username, :password
+    attr_accessor :x_fitocracy_user, :agent, :error
 
-    validate_user
-  end
+    def initialize(hash={})
+      @username = hash[:username] || ENV['fitocracy_api_username']
+      @password = hash[:password] || ENV['fitocracy_api_password']
+      @agent    = hash[:agent]
 
-  private
+      validate_user
+    end
 
-  def validate_user
-    @error ||= 'Username is missing' if username.empty?
-    @error ||= 'Password is missing' if password.empty?
+    def activities
+      @activities ||= JSON.parse(@agent.get(Paths.activities_uri(ex_fitocracy_user)).body)
+    end
+
+    private
+
+    def validate_user
+      @error ||= 'Username is missing' if username.empty?
+      @error ||= 'Password is missing' if password.empty?
+    end
   end
 end

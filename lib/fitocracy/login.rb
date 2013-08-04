@@ -1,4 +1,4 @@
-require_relative '../lib/fitocracy/paths'
+require 'fitocracy/paths'
 
 module Fitocracy
   class Login

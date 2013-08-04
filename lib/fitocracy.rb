@@ -1,8 +1,6 @@
-require "fitocracy/gem/version"
-
 module Fitocracy
-    # Your code goes here...
-
 end
+require "fitocracy/version"
 require 'fitocracy/user'
 require 'fitocracy/activity'
+require 'fitocracy/login'

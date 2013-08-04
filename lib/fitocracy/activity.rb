@@ -1,5 +1,5 @@
 module Fitocracy
-  class Activity
+  class Activity < Base
     def initialize(hash={})
       @user          = hash[:user]
       @agent         = hash[:agent]
