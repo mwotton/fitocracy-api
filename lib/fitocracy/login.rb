@@ -1,6 +1,6 @@
 require_relative '../lib/fitocracy/paths'
 
-module PageModels
+module Fitocracy
   class Login
     def initialize(agent, user)
       @agent = agent
