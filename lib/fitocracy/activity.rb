@@ -1,5 +1,6 @@
+require 'fitocracy/base'
 module Fitocracy
-  class Activity < Base
+  class Activity
     def initialize(hash={})
       @user          = hash[:user]
       @agent         = hash[:agent]
@@ -21,5 +22,11 @@ module Fitocracy
 
       @agent.get(::Fitocracy::Paths.activity_history_uri(@activity['id']))
     end
+
+    protected
+    def history_path
+      "get_history_json_from_activity/#{@id}/?max_sets=-1&max_workouts=-1&reverse=1"
+    end
+
   end
 end

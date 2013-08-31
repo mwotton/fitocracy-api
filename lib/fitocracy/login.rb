@@ -2,25 +2,30 @@ require 'fitocracy/paths'
 
 module Fitocracy
   class Login
-    def initialize(agent, user)
+    attr_accessor :x_fitocracy_user
+    def initialize(agent)
       @agent = agent
-      @user  = user
     end
 
-    def login
-      @agent.post(::Fitocracy::Paths.login_uri, form_values)
+    def login(user, password)
+      print [user,password].inspect
+      res = @agent.post(::Fitocracy::Paths.login_uri, form_values(user,password))
+      body = JSON.parse(res.body)
+      print body
+      raise "invalid credentials" unless body['success'] == true
+      res.response['x-fitocracy-user']
     end
 
     private
 
-    def form_values
+    def form_values(user,password)
       {
         'csrfmiddlewaretoken' => login_form['csrfmiddlewaretoken'],
         'is_username'         => '1',
         'json'                => '1',
         'next'                => '/home/',
-        'username'            => @user.username,
-        'password'            => @user.password
+        'username'            => user,
+        'password'            => password
       }
     end
 
